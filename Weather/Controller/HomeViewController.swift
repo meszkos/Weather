@@ -11,6 +11,8 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    let cityNames = ["London", "Barcelona", "Paris"]
+    
     var manager = WeatherManager()
     var hourlyForecast = [WeatherModel]()
     
@@ -18,17 +20,16 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         manager.delegate = self
-        
-        manager.performRequest(with: "https://api.openweathermap.org/data/2.5/forecast?q=london&appid=639a60b1b7177be0be3f47585cdc8538&units=metric")
-        
         tableView.delegate = self
         tableView.dataSource = self
         
+        manager.fetchWeather(for: cityNames )
         tableView.register(CityRowCell.nib(), forCellReuseIdentifier: CityRowCell.identifier)
         
     }
 }
 
+//MARK: - Delegate Methods
 
 extension HomeViewController: WeatherManagerDelegate{
     
@@ -36,16 +37,13 @@ extension HomeViewController: WeatherManagerDelegate{
         DispatchQueue.main.async {
             for hourForecast in weather{
                 self.hourlyForecast.append(hourForecast)
-            }
-            DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
-    
     }
     
     func didFailWithError(error: Error) {
-        //
+        print("DEBUG: Fething weather data failed with error: \(error)")
     }
     
     
@@ -57,14 +55,50 @@ extension HomeViewController: WeatherManagerDelegate{
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return cityNames.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CityRowCell.identifier, for: indexPath) as! CityRowCell
         
-        cell.configure(with: hourlyForecast)
-        print("hourly forecast is ---- \(hourlyForecast)")
+        switch indexPath.row{
+        case 0:
+            cell.cityLabel.text = "Paris"
+            var parisForecast:[WeatherModel] = []
+            if hourlyForecast.count == 24{
+                for i in 0...8{
+                    parisForecast.append(hourlyForecast[i])
+                }
+                
+                cell.configure(with: parisForecast)
+            }
+        case 1:
+            cell.cityLabel.text = "London"
+            var londonForecast:[WeatherModel] = []
+            if hourlyForecast.count == 24{
+                for i in 8...15{
+                    londonForecast.append(hourlyForecast[i])
+                }
+                
+                cell.configure(with: londonForecast)
+            }
+            
+        case 2:
+            cell.cityLabel.text = "Barcelona"
+            var barcelonaForecast:[WeatherModel] = []
+            if hourlyForecast.count == 24{
+                for i in 16...23{
+                    barcelonaForecast.append(hourlyForecast[i])
+                }
+
+                cell.configure(with: barcelonaForecast)
+            }
+        
+            
+        default:
+            cell.cityLabel.text = ""
+        }
+        
         
         return cell
     }

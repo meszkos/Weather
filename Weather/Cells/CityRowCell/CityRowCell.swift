@@ -9,7 +9,7 @@ import UIKit
 
 class CityRowCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
     
-    var models = [WeatherModel]()
+    var weather = [WeatherModel]()
     
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet var collectionView: UICollectionView!
@@ -34,7 +34,7 @@ class CityRowCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
         // Configure the view for the selected state
     }
     func configure(with models: [WeatherModel]){
-        self.models = models
+        self.weather = models
     }
 }
 
@@ -46,17 +46,14 @@ extension CityRowCell: UICollectionViewDelegate, UICollectionViewDataSource{
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
-        return models.count
+        return weather.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCell.identifier, for: indexPath) as! WeatherCell
         
-        cell.configure(with: models[indexPath.row])
+        cell.configure(with: weather[indexPath.row])
         
         return cell
     }
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        <#code#>
-//    }
 }

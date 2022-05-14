@@ -9,10 +9,12 @@ import Foundation
 
 struct WeatherModel{
     
+    var cityName: String
     var temp: String
     var description: String
     var hour: String
     var conditionId: Int
+    
     
     //var hourlyData: [WeatherData] = []
     
