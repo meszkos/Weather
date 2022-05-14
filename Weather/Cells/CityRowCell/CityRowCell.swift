@@ -38,6 +38,8 @@ class CityRowCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
     }
 }
 
+//MARK: - CollectionView Methods
+
 extension CityRowCell: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return models.count
@@ -50,7 +52,4 @@ extension CityRowCell: UICollectionViewDelegate, UICollectionViewDataSource{
         
         return cell
     }
-    
-    
-    
 }

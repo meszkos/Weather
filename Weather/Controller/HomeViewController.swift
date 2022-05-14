@@ -11,6 +11,7 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    var manager = WeatherManager()
     var models = [WeatherModel]()
     
     override func viewDidLoad() {
@@ -19,6 +20,9 @@ class HomeViewController: UIViewController {
         tableView.register(CityRowCell.nib(), forCellReuseIdentifier: CityRowCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
+        manager.delegate = self
+        
+        manager.performRequest(with: "https://api.openweathermap.org/data/2.5/forecast?q=london&appid=639a60b1b7177be0be3f47585cdc8538&units=metric")
         
         models.append(WeatherModel(temp: "25", description: "Rain", hour: "14:00",conditionId: 200))
         models.append(WeatherModel(temp: "25", description: "Rain", hour: "14:00",conditionId: 300))
@@ -27,6 +31,20 @@ class HomeViewController: UIViewController {
         
     }
 
+}
+
+
+extension HomeViewController: WeatherManagerDelegate{
+    
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
+        //
+    }
+    
+    func didFailWithError(error: Error) {
+        //
+    }
+    
+    
 }
 
 
@@ -49,20 +67,3 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         return 200
     }
 }
-
-//MARK: -
-
-//struct Model{
-//    var temp: String
-//    var description: String
-//    var hour: String
-//    var imageName: String
-//
-//    init(temp: String, description: String, hour: String, imageName: String){
-//        self.temp = temp
-//        self.description = description
-//        self.hour = hour
-//        self.imageName = imageName
-//    }
-//}
-
