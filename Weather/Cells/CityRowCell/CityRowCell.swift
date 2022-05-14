@@ -22,6 +22,9 @@ class CityRowCell: UITableViewCell, UICollectionViewDelegateFlowLayout {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        cityLabel.layer.masksToBounds = true
+        cityLabel.layer.cornerRadius = 12
+        
         collectionView.register(WeatherCell.nib(), forCellWithReuseIdentifier: WeatherCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
