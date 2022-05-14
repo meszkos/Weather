@@ -60,22 +60,23 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CityRowCell.identifier, for: indexPath) as! CityRowCell
+
         
         switch indexPath.row{
         case 0:
-            cell.cityLabel.text = "Paris"
             var parisForecast:[WeatherModel] = []
             if hourlyForecast.count == 24{
-                for i in 0...8{
+                cell.cityLabel.text = hourlyForecast[1].cityName
+                for i in 0...7{
                     parisForecast.append(hourlyForecast[i])
                 }
                 
                 cell.configure(with: parisForecast)
             }
         case 1:
-            cell.cityLabel.text = "London"
             var londonForecast:[WeatherModel] = []
             if hourlyForecast.count == 24{
+                cell.cityLabel.text = hourlyForecast[9].cityName
                 for i in 8...15{
                     londonForecast.append(hourlyForecast[i])
                 }
@@ -84,22 +85,19 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
             }
             
         case 2:
-            cell.cityLabel.text = "Barcelona"
             var barcelonaForecast:[WeatherModel] = []
             if hourlyForecast.count == 24{
+                cell.cityLabel.text = hourlyForecast[17].cityName
                 for i in 16...23{
                     barcelonaForecast.append(hourlyForecast[i])
                 }
 
                 cell.configure(with: barcelonaForecast)
             }
-        
-            
+    
         default:
             cell.cityLabel.text = ""
         }
-        
-        
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
