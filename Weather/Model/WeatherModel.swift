@@ -14,7 +14,7 @@ struct WeatherModel{
     var hour: String
     var conditionId: Int
     
-    var hourlyData: [WeatherData] = []
+    //var hourlyData: [WeatherData] = []
     
     var imageName: String{
         switch conditionId{

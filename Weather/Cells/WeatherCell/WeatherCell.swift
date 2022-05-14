@@ -27,7 +27,7 @@ class WeatherCell: UICollectionViewCell {
 
    
     public func configure(with model: WeatherModel){
-        self.tempLabel.text = model.temp
+        self.tempLabel.text = "\(model.temp)°"
         self.descriptionLabel.text = model.description
         self.hourLabel.text = model.hour
         self.weatherImage.image = UIImage(systemName: model.imageName)
