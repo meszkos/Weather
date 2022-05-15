@@ -64,35 +64,35 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         
         switch indexPath.row{
         case 0:
-            var parisForecast:[WeatherModel] = []
+            var firstForecast:[WeatherModel] = []
             if hourlyForecast.count == 24{
                 cell.cityLabel.text = hourlyForecast[1].cityName
                 for i in 0...7{
-                    parisForecast.append(hourlyForecast[i])
+                    firstForecast.append(hourlyForecast[i])
                 }
                 
-                cell.configure(with: parisForecast)
+                cell.configure(with: firstForecast)
             }
         case 1:
-            var londonForecast:[WeatherModel] = []
+            var secondForecast:[WeatherModel] = []
             if hourlyForecast.count == 24{
                 cell.cityLabel.text = hourlyForecast[9].cityName
                 for i in 8...15{
-                    londonForecast.append(hourlyForecast[i])
+                    secondForecast.append(hourlyForecast[i])
                 }
                 
-                cell.configure(with: londonForecast)
+                cell.configure(with: secondForecast)
             }
             
         case 2:
-            var barcelonaForecast:[WeatherModel] = []
+            var thirdForecast:[WeatherModel] = []
             if hourlyForecast.count == 24{
                 cell.cityLabel.text = hourlyForecast[17].cityName
                 for i in 16...23{
-                    barcelonaForecast.append(hourlyForecast[i])
+                    thirdForecast.append(hourlyForecast[i])
                 }
 
-                cell.configure(with: barcelonaForecast)
+                cell.configure(with: thirdForecast)
             }
     
         default:

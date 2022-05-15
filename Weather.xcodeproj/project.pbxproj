@@ -51,6 +51,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2259614E2830DD6100F297B6 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				22D0240C282E6DDA00BD1947 /* Cells */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		22D023E2282D634700BD1947 = {
 			isa = PBXGroup;
 			children = (
@@ -72,8 +80,8 @@
 			children = (
 				22D023EE282D634700BD1947 /* AppDelegate.swift */,
 				22D023F0282D634700BD1947 /* SceneDelegate.swift */,
+				2259614E2830DD6100F297B6 /* Components */,
 				22D02413282E6E2400BD1947 /* Model */,
-				22D0240C282E6DDA00BD1947 /* Cells */,
 				22D02415282E6E3900BD1947 /* View */,
 				22D02414282E6E2E00BD1947 /* Controller */,
 				22D023F7282D634B00BD1947 /* Assets.xcassets */,
